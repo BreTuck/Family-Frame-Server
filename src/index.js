@@ -6,7 +6,7 @@ import routes from './routes';
 import database from './database';
 
 const PORT = 3000;
-const HOSTNAME = '10.0.0.84';
+const HOSTNAME = '67.176.4.127';
 const app = express();
 
 app.use(express.json());
