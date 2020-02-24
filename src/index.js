@@ -6,7 +6,7 @@ import routes from './routes';
 import database from './database';
 
 const PORT = 3000;
-const HOSTNAME = '67.176.4.127';
+// const HOSTNAME = '67.176.4.127';
 const app = express();
 
 app.use(express.json());
@@ -27,6 +27,6 @@ app.get('/', (req, res) => {
 app.use('/user', routes.user);
 app.use('/image', routes.image);
 
-app.listen(PORT, HOSTNAME, () =>
+app.listen(PORT, () =>
   console.log(`Example app listening on port ${PORT}!`),
 );
