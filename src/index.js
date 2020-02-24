@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import routes from './routes';
 import database from './database';
+import 'dotenv/config';
 
 const PORT = 3000;
 // const HOSTNAME = '67.176.4.127';
@@ -14,6 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 
+// Middleware to return images from the necessary directory 
+app.use('/static', express.static(path.join(__dirname, process.env.PATH_TO_IMAGE_DIRECTORY)));
+
 app.use((req, res, next) => {
   req.context = {
     database
@@ -21,9 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send("Hello World!");
-});
 app.use('/user', routes.user);
 app.use('/image', routes.image);
 

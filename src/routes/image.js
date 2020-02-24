@@ -20,7 +20,7 @@ router.get('/all', auth.authenticate, async (req, res) => {
     }
 });
 
-// Returns the image file (file URL) associated with the image ID provided
+// Returns the image data (title, file URL, sender) associated with the image ID provided
 router.get('/:ID', auth.authenticate, async (req, res) => {
     const imageID = req.params.ID;
     const requestedImg = await req.context.database.image.getImageByID(imageID, res.locals.user.user_id);
