@@ -32,9 +32,8 @@ router.get('/:ID', auth.authenticate, async (req, res) => {
     }
 });
 
-router.put('/update/:ID', auth.authenticate, async (req, res) => {
-    const imageID = req.params.ID;
-    const updatedImg = await req.context.database.image.updateImage(req.body, imageID, res.locals.user.user_id);
+router.put('/update', auth.authenticate, async (req, res) => {
+    const updatedImg = await req.context.database.image.updateImage(req.body, res.locals.user.user_id);
     console.log(updatedImg);
     if(updatedImg != -1) {
         res.status(200).send({ success: true, images: updatedImg.rows[0] });

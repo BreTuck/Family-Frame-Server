@@ -10,10 +10,11 @@ const image = {
         const queryText = 'SELECT * FROM frame_image WHERE image_id = ($1) AND owner_id = ($2);';
         return await db.pool.query(queryText, queryParams);
     },
-    async updateImage(imageData, imageID, userID) {
-        const queryParams = [ imageData.title, imageID, userID ];
+    async updateImage(imageData, userID) {
+        const queryParams = [ imageData.title, imageData.id, userID ];
         const queryText = 'UPDATE frame_image SET title = ($1) WHERE image_id = ($2) AND owner_id = ($3);';
         const updatedImg = await db.pool.query(queryText, queryParams);
+        console.log(updatedImg);
         if(updatedImg.rowCount != 0) {
             return await this.getImageByID(imageID, userID);
         } else {
