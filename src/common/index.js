@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 
 const auth = {
     async authenticate(req, res, next) {
-        const currentUserToken = req.headers.authorization;
+        let currentUserToken = req.headers.authorization;
+        if(currentUserToken === undefined) currentUserToken = req.cookies.userVerificationToken;
         if(currentUserToken) {
             const tokenPayload = jwt.verify(currentUserToken, process.env.JWT_SECRET);
             if(tokenPayload) {

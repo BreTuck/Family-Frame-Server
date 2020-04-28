@@ -24,7 +24,7 @@ router.post('/signup', async (req, res) => {
             if(hash) {
                 try {
                     const userCreated  = await req.context.database.user.createUser(req.body, hash);
-                    if(userCreated > -1) {
+                    if(userCreated.rowCount === 1) {
                         jwt.sign({ userID: userCreated.rows[0].user_id }, process.env.JWT_SECRET, function(err, token) {
                             if(err) {
                                 console.error(err);
@@ -105,7 +105,6 @@ router.post('/update', auth.authenticate, async (req, res) => {
 });
 // Change Password
 router.post('/change', auth.authenticate, async (req, res) => {
-    console.log(req.body.password);
     const hash = await bcrypt.hash(req.body.password, req.context.database.user.saltRounds);
     const userUpdated = await req.context.database.user.changePassword(res.locals.user.user_id, hash);
     if(userUpdated != -1) {
