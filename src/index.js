@@ -27,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use('/user', routes.user);
 app.use('/image', routes.image);
+app.use('/mail', routes.mail);
 
 app.listen(PORT, () =>
   console.log(`Example app listening on port ${PORT}!`),

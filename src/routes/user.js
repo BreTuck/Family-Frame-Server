@@ -5,13 +5,22 @@ import auth from '../common';
 
 const router = Router();
 
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
     req.context.database.user.getUserByID(0).then(res => {
         console.log(res);
     }).catch((err) => {
         console.error(err);
     });
 });
+
+// Access user data for Mail Access
+// router.get('/all', (req, res) => {
+//     req.context.database.user.getAllUsers().then(res => {
+//         console.log(res);
+//     }).catch((err) => {
+//         console.error(err);
+//     });
+// });
 // User SignUp
 router.post('/signup', async (req, res) => {
     try {

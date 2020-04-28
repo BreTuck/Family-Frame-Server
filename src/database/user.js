@@ -28,6 +28,15 @@ const user = {
         const queryText = 'SELECT * FROM frame_user WHERE user_id = ($1);';
         return await db.pool.query(queryText, [ userID ]);
     },
+    async getAllUsers() {
+        const queryText =  'SELECT frame_user.name FROM frame_user;';
+        const allUsers = await db.pool.query(queryText);
+        if(allUsers.rowCount != 0) {
+            return allUsers;
+        } else {
+            return -1;
+        }
+    },
     async createUser(userData, hash) {
         const nextUserID = await this.findNextUserID();
         const queryParams = [ nextUserID, userData.name, userData.email, hash];
