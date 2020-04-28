@@ -89,7 +89,7 @@ router.get('/get', auth.authenticate, (req, res) => {
     res.status(200).send({ success: true, user: res.locals.user });
 });
 // Update user data by ID
-router.post('/update', auth.authenticate, async (req, res) => {
+router.put('/update', auth.authenticate, async (req, res) => {
     const userUpdated = await req.context.database.user.updateUser(res.locals.user.user_id, req.body);
     if(userUpdated != -1) {
         res.locals.user = {
